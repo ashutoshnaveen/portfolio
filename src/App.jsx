@@ -1,4 +1,5 @@
 import Navbar from './components/Navbar';
+import AmbientAudio from './components/AmbientAudio';
 import Hero from './components/Hero';
 import About from './components/About';
 import Education from './components/Education';
@@ -16,6 +17,7 @@ function App() {
   return (
     <div className="bg-[#0a0a0f] min-h-screen">
       <Navbar />
+      <AmbientAudio />
       <Hero />
       <About />
       <Education />
