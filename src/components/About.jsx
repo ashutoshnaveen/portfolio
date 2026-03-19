@@ -55,7 +55,8 @@ export default function About() {
                 big data pipelines monitoring 20,000+ ServiceNow instances globally.
               </p>
               <p>
-                My engineering roots go back to building Raspberry Pi clusters during college and interning
+                My engineering roots go back to building Raspberry Pi clusters under
+                <span className="text-white font-medium"> Dr. Devender Singh</span> during college and interning
                 under <span className="text-white font-medium">Dr. Tanima Dutta</span> (CSE, IIT BHU) on deep neural
                 network based attendance systems. That foundation in distributed computing and computer vision
                 shaped my passion for building resilient, scalable systems — from event-driven microservices

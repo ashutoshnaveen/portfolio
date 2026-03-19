@@ -28,8 +28,8 @@ const contactLinks = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/ashutoshnaveen',
-    href: 'https://linkedin.com/in/ashutoshnaveen',
+    value: 'linkedin.com/in/ashutoshnaveen/',
+    href: 'https://www.linkedin.com/in/ashutoshnaveen/',
     color: 'blue',
   },
   {

@@ -82,7 +82,7 @@ const earlyProjects = [
   {
     title: 'Distributed Optimization on RPi Cluster',
     icon: Cpu,
-    description: 'Parallel genetic algorithm engine on 3×3 Raspberry-Pi cluster via MPI. Achieved ~9× speedup.',
+    description: 'Parallel genetic algorithm engine on 3×3 Raspberry-Pi cluster via MPI. Achieved ~9× speedup. Mentored by Dr. Devender Singh.',
     tech: ['MPI', 'Python', 'Distributed Systems'],
   },
   {
@@ -94,7 +94,7 @@ const earlyProjects = [
   {
     title: 'Distributed Power Grid Monitoring',
     icon: Zap,
-    description: 'ML-based monitoring with image-based meter reading on Raspberry-Pi clusters.',
+    description: 'ML-based monitoring with image-based meter reading on Raspberry-Pi clusters. Mentored by Dr. Devender Singh.',
     tech: ['Machine Learning', 'Raspberry Pi', 'Python'],
   },
   {
