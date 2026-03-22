@@ -58,7 +58,7 @@ export default function About() {
               <p>
                 My engineering roots trace back to building Raspberry Pi clusters for parallel
                 optimization under <span className="text-white font-medium">Dr. Devender Singh</span> and
-                researching deep neural networks for computer vision under
+                researching deep neural networks for computer vision under{' '}
                 <span className="text-white font-medium">Dr. Tanima Dutta</span> (CSE, IIT BHU).
                 That foundation in distributed computing and ML shaped a passion for building
                 resilient systems at the intersection of infrastructure and intelligence.

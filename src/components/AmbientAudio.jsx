@@ -69,7 +69,7 @@ export default function AmbientAudio() {
   const [useFile, setUseFile] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio('/audio/sitar.mp3');
+    const audio = new Audio('/audio/ambient.mp3');
     audio.loop = true;
     audio.volume = 0.3;
     audio.addEventListener('canplaythrough', () => setUseFile(true));
@@ -141,7 +141,7 @@ export default function AmbientAudio() {
       transition={{ delay: 2, duration: 0.5 }}
       onClick={toggleAudio}
       className="fixed bottom-6 right-6 z-50 p-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-blue-500/30 hover:bg-blue-500/10 transition-all duration-300 cursor-pointer group"
-      title={playing ? 'Mute ambient sound' : 'Play ambient sitar'}
+      title={playing ? 'Mute ambient sound' : 'Play ambient music'}
     >
       <AnimatePresence mode="wait">
         {playing ? (
@@ -174,7 +174,7 @@ export default function AmbientAudio() {
           transition={{ delay: 3 }}
           className="absolute -top-10 right-0 whitespace-nowrap text-[10px] text-gray-500 bg-white/5 border border-white/10 rounded-md px-2 py-1 backdrop-blur-sm"
         >
-          ♪ ambient sitar
+          ♪ ambient music
         </motion.div>
       )}
 

@@ -4,10 +4,11 @@ import { Menu, X, Terminal } from 'lucide-react';
 
 const navLinks = [
   { name: 'About', href: '#about' },
+  { name: 'Education', href: '#education' },
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
   { name: 'Skills', href: '#skills' },
-  { name: 'Timeline', href: '#timeline' },
+  { name: 'Awards', href: '#awards' },
   { name: 'Ventures', href: '#ventures' },
   { name: 'Contact', href: '#contact' },
 ];

@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Content gap working directory (private drafts)
+.content-gaps/
