@@ -2,79 +2,17 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, VolumeX } from 'lucide-react';
 
-function createTanpuraDrone(audioContext) {
-  const masterGain = audioContext.createGain();
-  masterGain.gain.value = 0;
-  masterGain.connect(audioContext.destination);
-
-  const notes = [
-    { freq: 130.81, gain: 0.12, type: 'sine' },
-    { freq: 196.00, gain: 0.08, type: 'sine' },
-    { freq: 261.63, gain: 0.06, type: 'sine' },
-    { freq: 131.81, gain: 0.04, type: 'triangle' },
-    { freq: 65.41, gain: 0.10, type: 'sine' },
-    { freq: 196.00, gain: 0.03, type: 'triangle' },
-  ];
-
-  const oscillators = notes.map(({ freq, gain, type }) => {
-    const osc = audioContext.createOscillator();
-    const oscGain = audioContext.createGain();
-
-    osc.type = type;
-    osc.frequency.value = freq;
-    oscGain.gain.value = gain;
-
-    const lfo = audioContext.createOscillator();
-    const lfoGain = audioContext.createGain();
-    lfo.frequency.value = 0.1 + Math.random() * 0.15;
-    lfoGain.gain.value = freq * 0.002;
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc.frequency);
-    lfo.start();
-
-    osc.connect(oscGain);
-    oscGain.connect(masterGain);
-    osc.start();
-
-    return { osc, lfo, oscGain };
-  });
-
-  const strumInterval = setInterval(() => {
-    const idx = Math.floor(Math.random() * oscillators.length);
-    const { oscGain } = oscillators[idx];
-    const baseGain = notes[idx].gain;
-    const now = audioContext.currentTime;
-    oscGain.gain.setValueAtTime(baseGain * 1.8, now);
-    oscGain.gain.exponentialRampToValueAtTime(baseGain, now + 2.5);
-  }, 3000 + Math.random() * 2000);
-
-  return {
-    masterGain,
-    stop: () => {
-      clearInterval(strumInterval);
-      oscillators.forEach(({ osc, lfo }) => {
-        osc.stop();
-        lfo.stop();
-      });
-    },
-  };
-}
-
 export default function AmbientAudio() {
   const [playing, setPlaying] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const audioContextRef = useRef(null);
-  const droneRef = useRef(null);
-  const audioElementRef = useRef(null);
-  const [useFile, setUseFile] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const audio = new Audio('/audio/ambient.mp3');
     audio.loop = true;
     audio.volume = 0.3;
-    audio.addEventListener('canplaythrough', () => setUseFile(true));
-    audio.addEventListener('error', () => setUseFile(false));
-    audioElementRef.current = audio;
+    audio.preload = 'auto';
+    audioRef.current = audio;
 
     return () => {
       audio.pause();
@@ -82,57 +20,19 @@ export default function AmbientAudio() {
     };
   }, []);
 
-  const fadeGain = useCallback((gainNode, targetValue, duration = 1.5) => {
-    const now = audioContextRef.current.currentTime;
-    gainNode.gain.setValueAtTime(gainNode.gain.value, now);
-    gainNode.gain.linearRampToValueAtTime(targetValue, now + duration);
-  }, []);
-
   const toggleAudio = useCallback(() => {
     if (!hasInteracted) setHasInteracted(true);
 
     if (playing) {
-      if (useFile && audioElementRef.current) {
-        audioElementRef.current.pause();
-      } else if (droneRef.current) {
-        fadeGain(droneRef.current.masterGain, 0, 1.5);
-        setTimeout(() => {
-          if (droneRef.current) {
-            droneRef.current.stop();
-            droneRef.current = null;
-          }
-          if (audioContextRef.current) {
-            audioContextRef.current.close();
-            audioContextRef.current = null;
-          }
-        }, 1600);
-      }
+      if (audioRef.current) audioRef.current.pause();
       setPlaying(false);
     } else {
-      if (useFile && audioElementRef.current) {
-        audioElementRef.current.play();
-        setPlaying(true);
-      } else {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        audioContextRef.current = ctx;
-        const drone = createTanpuraDrone(ctx);
-        droneRef.current = drone;
-        fadeGain(drone.masterGain, 0.15, 2);
+      if (audioRef.current) {
+        audioRef.current.play().catch(() => {});
         setPlaying(true);
       }
     }
-  }, [playing, hasInteracted, useFile, fadeGain]);
-
-  useEffect(() => {
-    return () => {
-      if (droneRef.current) {
-        droneRef.current.stop();
-      }
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
-      }
-    };
-  }, []);
+  }, [playing, hasInteracted]);
 
   return (
     <motion.button
