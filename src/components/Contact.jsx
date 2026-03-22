@@ -55,8 +55,8 @@ export default function Contact() {
             Let's Connect
           </h2>
           <p className="text-gray-400 max-w-lg mx-auto mb-12">
-            I'm always open to discussing distributed systems, infrastructure challenges,
-            or new opportunities. Feel free to reach out.
+            I'm always open to conversations about distributed systems, AI/ML,
+            infrastructure at scale, or new opportunities. Feel free to reach out.
           </p>
         </FadeIn>
 

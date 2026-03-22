@@ -26,13 +26,13 @@ const ventures = [
     statusColor: 'yellow',
     color: 'green',
     description:
-      'During the COVID-19 lockdown, I built a hyper-local vegetable delivery platform to reduce physical contact between vendors and customers — connecting neighborhood sellers with nearby households while minimizing pandemic exposure.',
+      'During the COVID-19 lockdown, I built a hyper-local vegetable delivery platform to reduce physical contact between vendors and customers, connecting neighborhood sellers with nearby households while minimizing pandemic exposure.',
     vision:
       'Longer-term vision was a robotic contactless delivery model with autonomous last-mile logistics. Explored challenges in local supply chains, logistics optimization, and the intersection of robotics and real-world delivery.',
     tags: ['Supply Chain', 'Logistics', 'Local Commerce', 'Robotics Vision'],
   },
   {
-    title: 'Teaching AI — Hyper-Personalized Learning',
+    title: 'Teaching AI: Hyper-Personalized Learning',
     subtitle: 'Active Exploration',
     icon: Brain,
     status: 'In Progress',
@@ -41,18 +41,18 @@ const ventures = [
     description:
       'Exploring an AI-driven teaching system designed to increase children\'s attention span and adapt to individual learning patterns. Unlike traditional one-size-fits-all education, this system dynamically adjusts to each learner\'s pace, curiosity, and cognitive style.',
     vision:
-      'Using ML and behavioral analysis for hyper-personalized learning — the system continuously observes how a student interacts with concepts and adjusts explanations, exercises, and pacing in real time.',
+      'Using ML and behavioral analysis for hyper-personalized learning. The system continuously observes how a student interacts with concepts and adjusts explanations, exercises, and pacing in real time.',
     tags: ['Machine Learning', 'EdTech', 'Behavioral Analysis', 'Personalization'],
   },
   {
-    title: 'Slick India — Custom Sneaker Art',
+    title: 'Slick India: Custom Sneaker Art',
     subtitle: 'Creative Venture',
     icon: Palette,
     status: 'Creative',
     statusColor: 'pink',
     color: 'purple',
     description:
-      'A creative venture around customized hand-painted sneakers — blending art, storytelling, and personal expression into wearable designs. Each pair serves as a canvas for experiments with color, themes, and illustrations.',
+      'A creative venture around customized hand-painted sneakers, blending art, storytelling, and personal expression into wearable designs. Each pair serves as a canvas for experiments with color, themes, and illustrations.',
     vision:
       'Inspired by anime, street art, and cultural motifs. Explored creativity outside software systems while learning about branding, niche communities, and product design.',
     tags: ['Art & Design', 'Branding', 'Custom Merchandise', 'Illustration'],
@@ -84,7 +84,7 @@ export default function Ventures() {
             Ventures & Experiments
           </h2>
           <p className="text-gray-400 max-w-2xl mb-16">
-            Ideas explored beyond the day job — from pandemic-era logistics to AI-powered
+            Ideas explored beyond the day job: from pandemic-era logistics to AI-powered
             education and creative expression through art.
           </p>
         </FadeIn>

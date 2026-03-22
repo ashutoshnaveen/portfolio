@@ -19,17 +19,17 @@ function FadeIn({ children, delay = 0 }) {
 
 const education = [
   {
-    degree: 'B.Tech — Electrical Engineering',
+    degree: 'B.Tech, Electrical Engineering',
     institution: 'Indian Institute of Technology (BHU), Varanasi',
     score: 'CGPA: 7.49',
     year: '2015–2019',
     icon: GraduationCap,
     color: 'blue',
     highlights: [
-      'Research under Prof. Devender Singh (HOD, EE) — Distributed systems & optimization',
-      'Internship under Dr. Tanima Dutta (CSE) — Deep Neural Networks for attendance',
-      'Poster Presentation on Institute Day — Parallel Computing on RPi Cluster',
-      'Spardha \'16 — Event Co-ordinator, Security Incharge for Core Events',
+      'Research under Prof. Devender Singh (HOD, EE): Distributed systems & optimization',
+      'Internship under Dr. Tanima Dutta (CSE): Deep Neural Networks for attendance',
+      'Poster Presentation on Institute Day: Parallel Computing on RPi Cluster',
+      'Spardha \'16: Event Co-ordinator, Security Incharge for Core Events',
     ],
   },
   {
@@ -52,10 +52,7 @@ const education = [
   },
 ];
 
-const certifications = [
-  { name: 'Proficiency Certificate in Python', institute: 'Guru Nanak Dev Computer Institute, Sardulgarh', year: '2017' },
-  { name: 'Proficiency Certificate in C, C++', institute: 'Guru Nanak Dev Computer Institute, Sardulgarh', year: '2017' },
-];
+const certifications = [];
 
 const colorMap = {
   blue: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20', dot: 'bg-blue-400' },
@@ -122,26 +119,28 @@ export default function Education() {
         </div>
 
         {/* Certifications */}
-        <FadeIn delay={0.3}>
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Award className="w-4 h-4 text-yellow-400" />
-            Certifications
-          </h3>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {certifications.map((cert) => (
-              <div
-                key={cert.name}
-                className="p-4 rounded-xl border border-white/5 bg-white/[0.02] flex items-start justify-between gap-3"
-              >
-                <div>
-                  <div className="text-white text-sm font-medium">{cert.name}</div>
-                  <div className="text-gray-500 text-xs mt-1">{cert.institute}</div>
+        {certifications.length > 0 && (
+          <FadeIn delay={0.3}>
+            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+              <Award className="w-4 h-4 text-yellow-400" />
+              Certifications
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {certifications.map((cert) => (
+                <div
+                  key={cert.name}
+                  className="p-4 rounded-xl border border-white/5 bg-white/[0.02] flex items-start justify-between gap-3"
+                >
+                  <div>
+                    <div className="text-white text-sm font-medium">{cert.name}</div>
+                    <div className="text-gray-500 text-xs mt-1">{cert.institute}</div>
+                  </div>
+                  <span className="text-gray-600 font-mono text-xs shrink-0">{cert.year}</span>
                 </div>
-                <span className="text-gray-600 font-mono text-xs shrink-0">{cert.year}</span>
-              </div>
-            ))}
-          </div>
-        </FadeIn>
+              ))}
+            </div>
+          </FadeIn>
+        )}
       </div>
     </section>
   );

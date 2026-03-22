@@ -20,39 +20,42 @@ function FadeIn({ children, delay = 0 }) {
 const awards = [
   {
     year: '2022',
-    title: 'Llama Award',
+    title: 'Engineering Excellence Award',
     type: 'llama',
     icon: Trophy,
     color: 'yellow',
     description:
-      'Recognized for exceptional work on the Unified MID Manager and self-healing frameworks. Presented the architecture and impact to leadership.',
+      'Recognized for exceptional work on the Unified MID Manager and self-healing frameworks. Consolidated 256 servers to 80 and reduced MTTR by 68%. Presented architecture and impact to senior leadership.',
   },
   {
     year: '2023',
-    title: 'Kudos Award — Chief Architect',
+    title: 'Chief Architect Recognition',
     type: 'kudos',
     icon: Bug,
     color: 'red',
     description:
-      'Independently identified a critical JavaScript bug where a new JS version could have prevented all global scripts from being accessed in local scope — potentially breaking platform-wide functionality. Promptly diagnosed the root cause and reported it, averting major impact.',
+      'Independently identified a critical JavaScript runtime bug where a new JS version would have broken global script scope resolution across the entire platform, potentially impacting thousands of customer instances. Diagnosed root cause and escalated, averting a P1 incident.',
+  
   },
   {
     year: '2024',
-    title: 'Llama Award',
+    title: 'Engineering Excellence Award',
     type: 'llama',
     icon: Trophy,
     color: 'yellow',
     description:
-      'Awarded for showcasing that MID Server can run on Kubernetes as a lightweight container, significantly reducing infrastructure overhead and proving containerization feasibility.',
+      'Awarded for proving Kubernetes containerization of the MID Server platform. Cut provisioning from 25 min to 3 min and improved resource utilization by 85%. Demonstrated feasibility that influenced platform roadmap.',
+  
   },
   {
     year: '2025',
-    title: 'Kudos Award — Documentation',
+    title: 'Documentation Excellence',
     type: 'kudos',
     icon: BookOpen,
     color: 'green',
     description:
-      'Recognized for publishing the most documentation in the Global Cloud Services organization, contributing to team knowledge sharing and operational excellence.',
+      'Recognized as the top documentation contributor across the Global Cloud Services org. Drove knowledge sharing, onboarding efficiency, and operational excellence across distributed teams.',
+  
   },
 ];
 
@@ -93,7 +96,7 @@ export default function Awards() {
             Awards & Achievements
           </h2>
           <p className="text-gray-400 max-w-2xl mb-16">
-            Recognized for high-impact engineering contributions at ServiceNow.
+            Recognized for high-impact engineering contributions across infrastructure and platform teams.
           </p>
         </FadeIn>
 
@@ -116,7 +119,7 @@ export default function Awards() {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border ${colors.badge}`}>
-                          {award.type === 'llama' ? '🦙 Llama' : '⭐ Kudos'}
+                          {award.type === 'llama' ? '🏆 Excellence' : '⭐ Recognition'}
                         </span>
                         <span className="text-gray-600 font-mono text-xs">{award.year}</span>
                       </div>

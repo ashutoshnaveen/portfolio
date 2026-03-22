@@ -54,7 +54,7 @@ const activities = [
     color: 'cyan',
   },
   {
-    title: '2nd Place — Science Project Exhibition',
+    title: '2nd Place, Science Project Exhibition',
     description: 'Won 2nd prize for "Underground Nuclear Power Plant" project at ESFUERZO, PPU Hissar.',
     icon: Medal,
     year: '2012',

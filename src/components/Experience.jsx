@@ -23,7 +23,7 @@ const roles = [
     period: 'Feb 2025 – Present',
     icon: Database,
     color: 'blue',
-    description: 'Big Data Platform — Instance Observer',
+    description: 'Big Data Platform, Instance Observer',
     highlights: [
       'Building data ingestion pipelines using Spark for analytics workloads',
       'Writing optimized Impala SQL queries for big data analytics',
@@ -39,10 +39,10 @@ const roles = [
     color: 'purple',
     description: 'MID Server Platform & Infrastructure',
     highlights: [
-      'Designed Kafka-based microservice architecture — ~40% workload offloading',
-      'Led Unified MID Server Framework — reduced servers from 256 → 80',
-      'Architected self-healing framework — 68% MTTR reduction, adopted by 52 services',
-      'Led Kubernetes containerization — provisioning time 25min → 3min, 85% resource improvement',
+      'Designed Kafka-based microservice architecture with ~40% workload offloading',
+      'Led Unified MID Server Framework, reduced servers from 256 to 80',
+      'Architected self-healing framework: 68% MTTR reduction, adopted by 52 services',
+      'Led Kubernetes containerization, cutting provisioning from 25min to 3min, 85% resource improvement',
       'Built bidirectional connector for workflow offloading microservices platform',
     ],
   },
@@ -53,7 +53,7 @@ const roles = [
     color: 'cyan',
     description: 'MID Server Infrastructure Platform',
     highlights: [
-      'Worked on MID Server infrastructure — bridge between customer data centers and ServiceNow cloud',
+      'Worked on MID Server infrastructure, the bridge between customer data centers and ServiceNow cloud',
       'Contributed to lifecycle management, orchestration workflows, and server-side management',
       'Data center infrastructure orchestration and distributed workflow management',
       'Platform reliability engineering fundamentals',
@@ -95,8 +95,8 @@ export default function Experience() {
             Professional Journey
           </h2>
           <p className="text-gray-400 max-w-2xl mb-16">
-            6+ years at ServiceNow building infrastructure that scales. From MID Server orchestration
-            to big data analytics platforms.
+            6+ years building infrastructure that scales, from distributed orchestration frameworks
+            to big data analytics platforms serving 20K+ instances globally.
           </p>
         </FadeIn>
 

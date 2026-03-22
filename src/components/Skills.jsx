@@ -18,19 +18,19 @@ function FadeIn({ children, delay = 0 }) {
 
 const skillCategories = [
   {
-    title: 'Languages — Proficient',
+    title: 'Languages (Proficient)',
     color: 'orange',
     skills: ['Python', 'C++', 'C', 'Java', 'SQL'],
   },
   {
-    title: 'Languages — Working Knowledge',
+    title: 'Languages (Working Knowledge)',
     color: 'pink',
     skills: ['JavaScript', 'Node.js', 'C#', 'Bash', 'REST APIs'],
   },
   {
     title: 'Distributed Systems',
     color: 'blue',
-    skills: ['MPI', 'Kafka', 'Event-Driven Architecture', 'Microservices', 'Message Queues', 'Fault Tolerance', 'Genetic Algorithms'],
+    skills: ['MPI', 'Kafka', 'Event-Driven Architecture', 'Microservices', 'Message Queues', 'Fault Tolerance', 'Consensus Protocols'],
   },
   {
     title: 'Infrastructure & Platform',
@@ -45,7 +45,7 @@ const skillCategories = [
   {
     title: 'AI/ML & Computer Vision',
     color: 'green',
-    skills: ['TensorFlow', 'OpenCV', 'CNNs', 'Deep Learning', 'Image Processing', 'Fuzzy Logic', 'Data Science'],
+    skills: ['PyTorch', 'TensorFlow', 'LLMs', 'Transformers', 'CNNs', 'Deep Learning', 'OpenCV', 'Hugging Face'],
   },
   {
     title: 'Observability & Monitoring',
@@ -55,7 +55,7 @@ const skillCategories = [
   {
     title: 'Tools & Practices',
     color: 'pink',
-    skills: ['Git', 'CI/CD', 'Agile', 'System Design', 'MATLAB', 'Simulink', 'Code Reviews'],
+    skills: ['Git', 'CI/CD', 'Agile', 'System Design', 'Technical Writing', 'Code Reviews'],
   },
 ];
 
@@ -81,7 +81,7 @@ export default function Skills() {
             Technical Expertise
           </h2>
           <p className="text-gray-400 max-w-2xl mb-16">
-            Deep expertise across the infrastructure stack — from low-level distributed systems
+            Deep expertise across the infrastructure stack, from low-level distributed systems
             to high-level analytics platforms.
           </p>
         </FadeIn>

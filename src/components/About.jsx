@@ -44,10 +44,11 @@ export default function About() {
           <FadeInSection delay={0.1}>
             <div className="space-y-5 text-gray-400 leading-relaxed">
               <p>
-                I'm a <span className="text-white font-medium">Senior Software Engineer at ServiceNow</span>,
-                specializing in distributed systems, infrastructure reliability, and big data platforms.
-                Originally from Haryana, I graduated from <span className="text-white font-medium">IIT (BHU) Varanasi</span> with
-                a B.Tech in Electrical Engineering (CGPA: 7.49) in 2019.
+                I'm a <span className="text-white font-medium">Senior Software Engineer</span> specializing
+                in distributed systems, infrastructure reliability, and data platforms at scale.
+                I graduated from <span className="text-white font-medium">IIT (BHU) Varanasi</span> with
+                a B.Tech in Electrical Engineering in 2019, and I've spent 6+ years building
+                systems that serve thousands of enterprise customers globally.
               </p>
               <p>
                 Over the past 6+ years, I've architected self-healing frameworks that reduced MTTR by 68%,
@@ -55,12 +56,14 @@ export default function About() {
                 big data pipelines monitoring 20,000+ ServiceNow instances globally.
               </p>
               <p>
-                My engineering roots go back to building Raspberry Pi clusters under
-                <span className="text-white font-medium"> Dr. Devender Singh</span> during college and interning
-                under <span className="text-white font-medium">Dr. Tanima Dutta</span> (CSE, IIT BHU) on deep neural
-                network based attendance systems. That foundation in distributed computing and computer vision
-                shaped my passion for building resilient, scalable systems — from event-driven microservices
-                to autonomous anomaly detection platforms.
+                My engineering roots trace back to building Raspberry Pi clusters for parallel
+                optimization under <span className="text-white font-medium">Dr. Devender Singh</span> and
+                researching deep neural networks for computer vision under
+                <span className="text-white font-medium">Dr. Tanima Dutta</span> (CSE, IIT BHU).
+                That foundation in distributed computing and ML shaped a passion for building
+                resilient systems at the intersection of infrastructure and intelligence.
+                I'm increasingly drawn to AI/ML systems, large-scale computing, and the
+                engineering challenges behind modern AI.
               </p>
             </div>
           </FadeInSection>

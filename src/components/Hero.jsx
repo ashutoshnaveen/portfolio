@@ -79,8 +79,8 @@ export default function Hero() {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed"
             >
-              Building distributed systems, self-healing platforms, and big data pipelines
-              that power enterprise infrastructure at scale.
+              I build distributed systems at scale and am now transitioning toward
+              AI research, large-scale learning systems, and intelligent computing.
             </motion.p>
 
             <motion.div
