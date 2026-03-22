@@ -8,15 +8,11 @@ export default function AmbientAudio() {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const audio = new Audio('/audio/ambient.mp3');
-    audio.loop = true;
-    audio.volume = 0.3;
-    audio.preload = 'auto';
-    audioRef.current = audio;
-
     return () => {
-      audio.pause();
-      audio.src = '';
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+      }
     };
   }, []);
 
@@ -27,10 +23,14 @@ export default function AmbientAudio() {
       if (audioRef.current) audioRef.current.pause();
       setPlaying(false);
     } else {
-      if (audioRef.current) {
-        audioRef.current.play().catch(() => {});
-        setPlaying(true);
+      if (!audioRef.current) {
+        const audio = new Audio('/audio/ambient.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audioRef.current = audio;
       }
+      audioRef.current.play().catch(() => {});
+      setPlaying(true);
     }
   }, [playing, hasInteracted]);
 
