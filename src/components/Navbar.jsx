@@ -39,12 +39,7 @@ export default function Navbar() {
           className="flex items-center gap-2 text-white font-bold text-lg no-underline"
           whileHover={{ scale: 1.05 }}
         >
-          <Terminal className="w-5 h-5 text-blue-400" />
-          <span className="font-mono text-sm">
-            <span className="text-blue-400">ashutosh</span>
-            <span className="text-gray-500">.</span>
-            <span className="text-purple-400">dev</span>
-          </span>
+          <span className="font-mono text-sm text-blue-400">Think.</span>
         </motion.a>
 
         {/* Desktop links */}
