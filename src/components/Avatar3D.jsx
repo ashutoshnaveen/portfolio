@@ -16,7 +16,7 @@ export default function Avatar3D({ position = [0, -1.8, 0], scale = 1.8 }) {
   // Model has its own animation — no extra floating needed
 
   return (
-    <group ref={group} position={position} scale={scale} rotation={[0, -0.15, 0]} dispose={null}>
+    <group ref={group} position={position} scale={scale} rotation={[0, 0, 0]} dispose={null}>
       <primitive object={scene} />
     </group>
   );

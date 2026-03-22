@@ -21,8 +21,8 @@ const contactLinks = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'ashutosh.naveen@gmail.com',
-    href: 'mailto:ashutosh.naveen@gmail.com',
+    value: 'hello@ashutoshnaveen.com',
+    href: 'mailto:hello@ashutoshnaveen.com',
     color: 'blue',
   },
   {
@@ -89,7 +89,7 @@ export default function Contact() {
 
         <FadeIn delay={0.2}>
           <a
-            href="mailto:ashutosh.naveen@gmail.com"
+            href="mailto:hello@ashutoshnaveen.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl transition-all duration-200 no-underline text-sm"
           >
             <Send className="w-4 h-4" />

@@ -20,7 +20,7 @@ function AvatarCanvas() {
       <directionalLight position={[-3, 3, 2]} intensity={0.4} color="#3b82f6" />
       <pointLight position={[0, 2, 3]} intensity={0.3} color="#8b5cf6" />
       <Suspense fallback={null}>
-        <Avatar3D position={[0, -1.7, 0]} scale={1.55} />
+        <Avatar3D position={[0, -1.8, 0]} scale={1.85} />
         <ContactShadows position={[0, -1.6, 0]} opacity={0.4} scale={6} blur={2.5} far={4} />
         <Environment preset="city" />
       </Suspense>
@@ -112,7 +112,7 @@ export default function Hero() {
               {[
                 { icon: Github, href: 'https://github.com/ashutoshnaveen', label: 'GitHub' },
                 { icon: Linkedin, href: 'https://www.linkedin.com/in/ashutoshnaveen/', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:ashutosh.naveen@gmail.com', label: 'Email' },
+                { icon: Mail, href: 'mailto:hello@ashutoshnaveen.com', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
