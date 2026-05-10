@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import {
   Cpu, Eye, Zap, Monitor, Home, ShoppingCart, Gamepad2,
   Server, Layers, Shield, Container, Workflow, Database,
-  ExternalLink, Brain, GitBranch,
+  ExternalLink, Brain, GitBranch, Globe,
 } from 'lucide-react';
 
 function FadeIn({ children, delay = 0 }) {
@@ -127,6 +127,16 @@ const aimlProjects = [
     tech: ['PyTorch', 'FastAPI', 'HuggingFace', 'Docker'],
     github: 'https://github.com/ashutoshnaveen/model-serving-infra',
   },
+  {
+    title: 'Wumpus World — AI Textbook Companion',
+    icon: Gamepad2,
+    color: 'green',
+    description: 'Interactive implementation of the Wumpus World from Russell & Norvig\'s AI: A Modern Approach. Features two AI agents (KB + Probabilistic), a shadow AI that grades every player move, and a post-game report card with textbook study suggestions. Single HTML file, zero dependencies, works offline as a PWA.',
+    highlights: ['Propositional logic KB inference engine', 'Shadow AI gameplay analysis with A–F grading', 'Probabilistic agent with P(pit)/P(wumpus) overlays', '17 test suites, 7000+ automated game worlds', 'PWA — offline on iOS, Android, desktop'],
+    tech: ['JavaScript', 'AI/Logic', 'Probability', 'PWA'],
+    github: 'https://github.com/ashutoshnaveen/wumpus-world',
+    live: 'https://ashutoshnaveen.github.io/wumpus-world/',
+  },
 ];
 
 const colorMap = {
@@ -210,18 +220,32 @@ export default function Projects() {
                     <div className={`p-2 rounded-lg ${colors.bg}`}>
                       <Icon className={`w-5 h-5 ${colors.text}`} />
                     </div>
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-gray-500 hover:text-cyan-400 transition-colors text-xs font-mono"
-                      >
-                        <GitBranch className="w-3.5 h-3.5" />
-                        View Source
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    )}
+                    <div className="flex items-center gap-3">
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-gray-500 hover:text-green-400 transition-colors text-xs font-mono"
+                        >
+                          <Globe className="w-3.5 h-3.5" />
+                          Live Demo
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-gray-500 hover:text-cyan-400 transition-colors text-xs font-mono"
+                        >
+                          <GitBranch className="w-3.5 h-3.5" />
+                          Source
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                    </div>
                   </div>
                   <h3 className="text-white font-semibold text-lg mb-2">{project.title}</h3>
                   <p className="text-gray-400 text-sm mb-4 leading-relaxed">{project.description}</p>

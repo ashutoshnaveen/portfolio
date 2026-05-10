@@ -48,7 +48,7 @@ export default function Contact() {
         <FadeIn>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px flex-1 max-w-12 bg-blue-500/50" />
-            <span className="text-blue-400 font-mono text-sm">10. Contact</span>
+            <span className="text-blue-400 font-mono text-sm">11. Contact</span>
             <div className="h-px flex-1 max-w-12 bg-blue-500/50" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
