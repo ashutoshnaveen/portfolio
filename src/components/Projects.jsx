@@ -24,7 +24,7 @@ function FadeIn({ children, delay = 0 }) {
 const professionalProjects = [
   {
     title: 'Autonomous Self-Healing Framework',
-    period: '2022-2023',
+    period: '2022–2023',
     icon: Shield,
     color: 'blue',
     description: 'Template-based anomaly detection engine with automated remediation workflows and decoupled polling architecture.',
@@ -60,7 +60,7 @@ const professionalProjects = [
   },
   {
     title: 'Big Data Instance Observer',
-    period: '2025-Present',
+    period: '2025–Present',
     icon: Database,
     color: 'blue',
     description: 'Data ingestion pipelines and analytics platform serving operational dashboards for enterprise customers.',
@@ -122,8 +122,8 @@ const aimlProjects = [
     title: 'Model Serving Infrastructure',
     icon: Brain,
     color: 'cyan',
-    description: 'Wrote an LLM inference server from scratch, loosely based on vLLM. Handles KV-cache with a PagedAttention-style block allocator, continuous batching at the iteration level, and streams responses over SSE.',
-    highlights: ['PagedAttention-style block memory management', 'Continuous batching (iteration-level)', 'Prometheus metrics + SSE streaming'],
+    description: 'Production-quality LLM inference server inspired by vLLM. Implements PagedAttention-style KV-cache, continuous batching, priority scheduling, and SSE streaming from scratch.',
+    highlights: ['PagedAttention block memory management', 'Continuous batching (iteration-level)', 'Prometheus metrics + SSE streaming'],
     tech: ['PyTorch', 'FastAPI', 'HuggingFace', 'Docker'],
     github: 'https://github.com/ashutoshnaveen/model-serving-infra',
   },
