@@ -10,6 +10,7 @@ import Timeline from './components/Timeline';
 import Awards from './components/Awards';
 import Extracurriculars from './components/Extracurriculars';
 import Ventures from './components/Ventures';
+import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -28,6 +29,7 @@ function App() {
       <Awards />
       <Extracurriculars />
       <Ventures />
+      <Blog />
       <Contact />
       <Footer />
     </div>
