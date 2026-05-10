@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import {
   Cpu, Eye, Zap, Monitor, Home, ShoppingCart, Gamepad2,
   Server, Layers, Shield, Container, Workflow, Database,
-  ExternalLink,
+  ExternalLink, Brain, GitBranch,
 } from 'lucide-react';
 
 function FadeIn({ children, delay = 0 }) {
@@ -117,6 +117,18 @@ const earlyProjects = [
   },
 ];
 
+const aimlProjects = [
+  {
+    title: 'Model Serving Infrastructure',
+    icon: Brain,
+    color: 'cyan',
+    description: 'Production-quality LLM inference server inspired by vLLM. Implements PagedAttention-style KV-cache, continuous batching, priority scheduling, and SSE streaming from scratch.',
+    highlights: ['PagedAttention block memory management', 'Continuous batching (iteration-level)', 'Prometheus metrics + SSE streaming'],
+    tech: ['PyTorch', 'FastAPI', 'HuggingFace', 'Docker'],
+    github: 'https://github.com/ashutoshnaveen/model-serving-infra',
+  },
+];
+
 const colorMap = {
   blue: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20' },
   purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/20' },
@@ -167,6 +179,63 @@ export default function Projects() {
                       </div>
                     ))}
                   </div>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tech.map((t) => (
+                      <span key={t} className="px-2 py-1 text-xs rounded-md bg-white/5 text-gray-500 font-mono">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
+
+        {/* AI/ML & Research Projects */}
+        <FadeIn>
+          <h3 className="text-xl font-semibold text-white mb-2">AI/ML & Infrastructure Research</h3>
+          <p className="text-gray-500 text-sm mb-8">Deep dives into ML systems, inference optimization, and distributed training</p>
+        </FadeIn>
+
+        <div className="grid md:grid-cols-1 gap-6 mb-20">
+          {aimlProjects.map((project, index) => {
+            const colors = colorMap[project.color];
+            const Icon = project.icon;
+            return (
+              <FadeIn key={project.title} delay={index * 0.05}>
+                <div className={`p-6 rounded-2xl border ${colors.border} bg-white/[0.02] card-hover`}>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`p-2 rounded-lg ${colors.bg}`}>
+                      <Icon className={`w-5 h-5 ${colors.text}`} />
+                    </div>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-gray-500 hover:text-cyan-400 transition-colors text-xs font-mono"
+                      >
+                        <GitBranch className="w-3.5 h-3.5" />
+                        View Source
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">{project.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">{project.description}</p>
+
+                  {project.highlights && (
+                    <div className="space-y-2 mb-4">
+                      {project.highlights.map((item, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className={`w-1.5 h-1.5 rounded-full ${colors.text.replace('text-', 'bg-')}`} />
+                          <span className="text-gray-500 text-xs">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {project.tech.map((t) => (
