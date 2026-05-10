@@ -352,6 +352,256 @@ const posts = [
       },
     ],
   },
+  {
+    id: 'wumpus-world-ai-companion',
+    title: 'I Turned a Textbook Exercise Into an AI Teaching Tool. Here\'s How It Works Under the Hood.',
+    date: 'May 2026',
+    readTime: '9 min read',
+    color: 'green',
+    tags: ['AI/Logic', 'Game Development', 'Knowledge Representation', 'PWA'],
+    github: 'https://github.com/ashutoshnaveen/wumpus-world',
+    live: 'https://ashutoshnaveen.github.io/wumpus-world/',
+    excerpt:
+      'The Wumpus World from Russell & Norvig is one of those textbook examples everyone reads but nobody actually plays. I wanted to change that. So I built a fully playable version with five game modes, two AI agents, and a shadow AI that grades your logical reasoning after every game. All in a single HTML file.',
+    content: [
+      {
+        type: 'heading',
+        text: 'Why This Exists',
+      },
+      {
+        type: 'paragraph',
+        text: 'I was reviewing Chapter 7 of AI: A Modern Approach for an interview prep cycle, and I realized something. The Wumpus World is one of the best examples of propositional logic and knowledge-based agents in any textbook, but there\'s no good way to actually play it. Every implementation I found was either a command-line tool from a university assignment or a half-finished demo. Nothing that let you feel how the inference works as you play.',
+      },
+      {
+        type: 'paragraph',
+        text: 'So I built one. Started as a weekend project, ended up becoming a pretty complete AI teaching tool. Five game modes covering Chapters 7 and 13, two autonomous AI agents, a live knowledge base overlay, and a gameplay grading system that tells you exactly where your reasoning went wrong.',
+      },
+      {
+        type: 'heading',
+        text: 'The KB Inference Engine',
+      },
+      {
+        type: 'paragraph',
+        text: 'The core of the game is a propositional logic knowledge base that mirrors exactly what the textbook describes. Every time you visit a cell, the game asserts facts: "no breeze at [2,3]" means none of the adjacent cells have a pit. "Stench at [3,1]" means at least one neighbor has the Wumpus. The KB uses these facts to derive safety for unvisited cells.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The inference rules are straightforward but composing them correctly took more work than I expected. You need to handle the case where a cell is adjacent to multiple visited cells with different percepts. A cell might be cleared of pit danger by one neighbor (no breeze) but still suspect for Wumpus from another (stench). The KB tracks these independently.',
+      },
+      {
+        type: 'code',
+        caption: 'KB update logic (simplified)',
+        text: `// When visiting cell [r,c] with no breeze:
+// All adjacent cells are provably safe from pits
+if (!breeze) {
+  for (const [nr, nc] of neighbors(r, c)) {
+    kb[nr][nc].pit = 'safe';    // KB |= ~Pit(nr,nc)
+  }
+}
+
+// When stench detected and all but one neighbor is cleared:
+// The remaining cell must contain the Wumpus
+const unknowns = adj.filter(([r,c]) => kb[r][c].wumpus === 'unknown');
+if (stench && unknowns.length === 1) {
+  const [wr, wc] = unknowns[0];
+  kb[wr][wc].wumpus = 'yes';   // KB |= Wumpus(wr,wc)
+}`,
+      },
+      {
+        type: 'paragraph',
+        text: 'The live KB overlay shows all of this in real time. Toggle it on and you can watch the inference propagate as you explore. Safe cells turn green, suspected hazards get flagged. It makes the textbook logic tangible in a way that reading the chapter never does.',
+      },
+      {
+        type: 'heading',
+        text: 'Two AI Agents: Logic vs Probability',
+      },
+      {
+        type: 'paragraph',
+        text: 'I built two agents that can solve the cave autonomously. The first is a pure KB agent straight from Chapter 7. It observes percepts, updates its knowledge base, picks the nearest safe unvisited cell via BFS, and navigates there. When it detects a stench and can narrow down the Wumpus location by elimination, it shoots. When the safe frontier runs out, it retreats home.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The second agent extends the first with probabilistic reasoning from Chapter 13. When there are no provably safe cells left, it estimates P(pit) and P(wumpus) for each unknown cell based on constraint counts from neighboring observations. If the best option is below a risk threshold, it takes the gamble. Otherwise it retreats.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Running both agents side by side on hundreds of games gives you a clear picture of why probability matters. The KB agent plays it safe but gets stuck more often. The probabilistic agent wins more games by taking calculated risks.',
+      },
+      {
+        type: 'stats',
+        title: 'Agent Performance (200 Classic-mode games each)',
+        headers: { col1: 'Metric', col2: 'KB Agent', col3: 'KB + Prob', col4: 'Diff' },
+        items: [
+          { label: 'Win rate', before: '~34%', after: '~63%', improvement: '+29 pts' },
+          { label: 'Avg score', before: '-180', after: '+220', improvement: 'Net positive' },
+          { label: 'Deaths by pit', before: '~8%', after: '~15%', improvement: 'Trades risk' },
+          { label: 'Stuck (no moves)', before: '~58%', after: '~22%', improvement: '-36 pts' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'That 34% vs 63% gap is the whole argument for Chapter 13 in one number. Pure logic is sound but incomplete. Add probability and you trade some safety for dramatically better outcomes.',
+      },
+      {
+        type: 'heading',
+        text: 'The Shadow AI: Grading Your Moves',
+      },
+      {
+        type: 'paragraph',
+        text: 'This was the feature I\'m most proud of. A "shadow AI" runs silently alongside every human game. It maintains its own copy of the knowledge base, observes the same percepts the player sees, and at every step computes what a logical agent would recommend. After game over, it compares what you did vs what it would have done, and classifies each move.',
+      },
+      {
+        type: 'stats',
+        title: 'Move Classification System',
+        headers: { col1: 'Rating', col2: 'Symbol', col3: 'Meaning', col4: 'Example' },
+        items: [
+          { label: 'Good', before: '\u2705', after: 'Provably safe move', improvement: 'Moved to KB-safe cell' },
+          { label: 'OK', before: '\u00b7', after: 'Neutral action', improvement: 'Turned or shot' },
+          { label: 'Risky', before: '\u26a0\ufe0f', after: 'Possible danger', improvement: 'Entered uncleared cell' },
+          { label: 'Mistake', before: '\u274c', after: 'Safe option existed', improvement: 'Ignored safe frontier' },
+          { label: 'Blunder', before: '\ud83d\udca5', after: 'Missed critical action', improvement: 'Forgot to grab gold' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'The grading logic was tricky to get right. A "risky" move isn\'t necessarily wrong. Sometimes the player has information the shadow KB doesn\'t (intuition, pattern recognition). But a "mistake" is more clear-cut: you entered an unknown cell when there was a provably safe one available. That\'s a reasoning error the KB can identify objectively.',
+      },
+      {
+        type: 'paragraph',
+        text: 'After the game, you get a report card with a letter grade (A through F), an accuracy percentage, a color-coded move log, and study suggestions that point to specific textbook sections based on what kinds of mistakes you made. If you walked into a cell with a known breeze neighbor, it tells you to review Section 7.3 on inference rules.',
+      },
+      {
+        type: 'heading',
+        text: 'Five Modes, One Codebase',
+      },
+      {
+        type: 'list',
+        items: [
+          {
+            title: 'Classic (Ch. 7)',
+            text: 'Standard 4x4 cave. Perfect sensors, deterministic movement. Pure propositional logic.',
+          },
+          {
+            title: 'Stochastic (Ch. 13)',
+            text: 'Same cave, but 20% chance your move slips sideways. Forces you to think about action uncertainty.',
+          },
+          {
+            title: 'Noisy Sensors (Ch. 13)',
+            text: '10% chance any breeze or stench percept is flipped. Your KB might be built on bad data.',
+          },
+          {
+            title: 'Large Cave',
+            text: '6x6 grid with two Wumpi. More cells to explore, more hazards to reason about.',
+          },
+          {
+            title: 'Nightmare',
+            text: '6x6, two Wumpi, noisy sensors, stochastic movement. Everything stacked together.',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'All five modes run on the same inference engine. The differences are just parameters: grid size, sensor noise probability, slip probability, Wumpus count. This was a deliberate design choice. I wanted one well-tested engine, not five separate implementations.',
+      },
+      {
+        type: 'heading',
+        text: 'Testing: Trust but Verify',
+      },
+      {
+        type: 'paragraph',
+        text: 'I wrote 17 test suites that run headless via Node. They cover world generation, percept correctness, movement mechanics, turning, shooting, grabbing, climbing, scoring, stochastic slip rates, noisy sensor flip rates, coordinate mapping, and edge cases. In total they generate over 7000 game worlds and verify each one.',
+      },
+      {
+        type: 'stats',
+        title: 'Test Coverage Summary',
+        headers: { col1: 'Suite', col2: 'What it tests', col3: 'Scale', col4: 'Status' },
+        items: [
+          { label: 'World gen', before: 'Layout validity', after: '500 worlds x 5 modes', improvement: 'Pass' },
+          { label: 'Noisy sensors', before: 'Flip rate ~10%', after: '1000 perceptions', improvement: 'Pass' },
+          { label: 'Stochastic', before: 'Slip rate ~20%', after: '500 moves', improvement: 'Pass' },
+          { label: 'Gold reach', before: 'BFS reachability', after: '5000 worlds', improvement: 'Pass' },
+          { label: 'Smart agent', before: 'Finds all gold', after: '500 games', improvement: 'Pass' },
+        ],
+      },
+      {
+        type: 'paragraph',
+        text: 'The gold reachability test was one I added after finding a subtle bug. The game was occasionally placing gold behind a wall of pits with no path from [1,1]. Now every generated world is BFS-verified: if you play perfectly, you can always reach the gold.',
+      },
+      {
+        type: 'heading',
+        text: 'Single File, Zero Dependencies',
+      },
+      {
+        type: 'paragraph',
+        text: 'The entire game is one HTML file. No build step, no npm install, no framework. All the JavaScript (inference engine, two AI agents, shadow AI, hint system, study guide, five game modes, touch controls) lives inline. It started this way because I wanted anyone to be able to download the file and play offline. It stayed this way because it actually worked fine at 2100 lines.',
+      },
+      {
+        type: 'paragraph',
+        text: 'For mobile distribution I added PWA support: a service worker that caches the page on first visit, a manifest for "Add to Home Screen," and platform-specific install banners. On iOS it shows step-by-step Share button instructions. On Android it hooks into the native install prompt. After the first visit, the game loads fully offline, even in airplane mode.',
+      },
+      {
+        type: 'architecture',
+        title: 'System Architecture',
+        text: `Single HTML File (2100 lines)
+├── Rendering Layer
+│   ├── Grid renderer with fog-of-war
+│   ├── KB overlay (safe / unknown / hazard)
+│   ├── Probability overlays (P(pit), P(wumpus))
+│   └── Report card with move-by-move log
+├── Game Engine
+│   ├── World generation (BFS-verified gold placement)
+│   ├── Percept computation (breeze, stench, glitter)
+│   ├── Movement + stochastic slip
+│   └── Noisy sensor simulation
+├── AI Layer
+│   ├── KB Agent (Ch.7 - propositional logic)
+│   ├── Probabilistic Agent (Ch.13 - risk assessment)
+│   └── Shadow AI (parallel KB for move grading)
+└── PWA Layer
+    ├── Service Worker (cache-first offline)
+    ├── Manifest + icons
+    └── Platform-aware install banners`,
+        caption: 'Everything runs client-side. No server, no API calls, no external dependencies.',
+      },
+      {
+        type: 'heading',
+        text: 'What I Learned',
+      },
+      {
+        type: 'list',
+        items: [
+          {
+            title: 'Inference is easy to describe, hard to implement correctly',
+            text: 'The textbook makes KB inference look like a few lines of pseudocode. Handling all the edge cases (multiple Wumpi, sensor noise, partial information) requires careful state management. The gap between theory and implementation is where you actually learn.',
+          },
+          {
+            title: 'The shadow AI concept is broadly useful',
+            text: 'Running a parallel "expert" alongside a user and comparing decisions after the fact is a pattern that works beyond games. It\'s basically how chess engines analyze human games. Could see this applied to any domain where you have a known-good decision model.',
+          },
+          {
+            title: 'Single-file architecture has real advantages',
+            text: 'No build system means no broken deploys, no dependency issues, no version conflicts. For a self-contained tool like this, the simplicity is a feature. Students can download one file and it just works.',
+          },
+          {
+            title: 'Testing stochastic systems needs statistical thinking',
+            text: 'You can\'t test "20% slip rate" with a single run. I had to generate hundreds of moves and verify the distribution falls within expected bounds. Same for noisy sensors. It changed how I think about testing non-deterministic systems.',
+          },
+        ],
+      },
+      {
+        type: 'heading',
+        text: 'Try It Yourself',
+      },
+      {
+        type: 'paragraph',
+        text: 'The game is live at ashutoshnaveen.github.io/wumpus-world. Play a round in Classic mode, then check your report card. If you\'re studying the AI textbook, try Noisy Sensors mode and watch how your KB becomes unreliable. Then switch to the AI agent view and see how the probabilistic agent handles the same uncertainty.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Source is on GitHub. The test suite runs via "node simulate.js" if you want to verify the game logic yourself. Pull requests welcome if you spot anything.',
+      },
+    ],
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -559,19 +809,34 @@ export default function Blog() {
                         className="overflow-hidden"
                       >
                         <div className="px-6 md:px-8 pb-8 border-t border-white/5 pt-2">
-                          {post.github && (
-                            <a
-                              href={post.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="inline-flex items-center gap-1.5 mt-6 mb-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors no-underline font-mono"
-                            >
-                              <GitBranch className="w-3.5 h-3.5" />
-                              View source on GitHub
-                              <ArrowUpRight className="w-3 h-3" />
-                            </a>
-                          )}
+                          <div className="flex flex-wrap items-center gap-4 mt-6 mb-2">
+                            {post.live && (
+                              <a
+                                href={post.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-1.5 text-sm text-green-400 hover:text-green-300 transition-colors no-underline font-mono"
+                              >
+                                <Zap className="w-3.5 h-3.5" />
+                                Play it live
+                                <ArrowUpRight className="w-3 h-3" />
+                              </a>
+                            )}
+                            {post.github && (
+                              <a
+                                href={post.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors no-underline font-mono"
+                              >
+                                <GitBranch className="w-3.5 h-3.5" />
+                                View source on GitHub
+                                <ArrowUpRight className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
                           <BlogContent blocks={post.content} />
                         </div>
                       </motion.div>
