@@ -8,7 +8,7 @@ Personal portfolio website built with React, Vite, TailwindCSS v4, and Framer Mo
 - **TailwindCSS v4** — utility-first styling
 - **Framer Motion** — scroll animations
 - **Lucide React** — icons
-- **Firebase Hosting** — deployment
+- **GitHub Pages** — deployment
 
 ## Development
 
@@ -25,40 +25,18 @@ npm run build
 
 Output goes to `dist/`.
 
-## Deploy to Firebase
+## Deploy to GitHub Pages
 
-### 1. Install Firebase CLI (if not already installed)
+Push to `main` (or run the **Deploy to GitHub Pages** workflow manually) to
+build and deploy the site with GitHub Actions. The published site uses the
+custom domain configured in `public/CNAME`:
 
-```bash
-npm install -g firebase-tools
+```text
+https://ashutoshnaveen.com
 ```
 
-### 2. Login to Firebase
-
-```bash
-firebase login
-```
-
-### 3. Initialize (first time only)
-
-Update `.firebaserc` with your Firebase project ID:
-
-```json
-{
-  "projects": {
-    "default": "your-actual-project-id"
-  }
-}
-```
-
-### 4. Build & Deploy
-
-```bash
-npm run build
-firebase deploy --only hosting
-```
-
-Your site will be live at `https://<your-project-id>.web.app`
+The repository's Pages source must be set to **GitHub Actions** under
+**Settings → Pages**.
 
 ## Project Structure
 
